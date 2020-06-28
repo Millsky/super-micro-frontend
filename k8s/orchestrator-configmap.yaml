@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: orchestrator-config
+data:
+  services: "fragment-1,fragment-2,fragment-3"
+  markup: "<div>Here is Fragment 1 {{fragment-1}}</div><div>Here is Fragment 2 {{fragment-2}}</div><div>Here is Fragment 3 {{fragment-3}}</div>"
