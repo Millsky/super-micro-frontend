@@ -19,6 +19,7 @@ spec:
       annotations:
         kompose.cmd: kompose convert -f docker-compose.yaml
         kompose.version: 1.21.0 (992df58d8)
+        linkerd.io/inject: enabled
       creationTimestamp: null
       labels:
         io.kompose.service: orchestrator
@@ -27,7 +28,7 @@ spec:
       - env:
         - name: PORT
           value: "8080"
-        image: kyle83567/orchestrator:v3
+        image: kyle83567/orchestrator:v4
         imagePullPolicy: ""
         name: orchestrator
         ports:

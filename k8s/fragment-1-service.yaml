@@ -10,9 +10,9 @@ metadata:
   name: fragment-1
 spec:
   ports:
-  - name: "8090"
-    port: 8090
-    targetPort: 8090
+  - name: "8080"
+    port: 8080
+    targetPort: 8080
   selector:
     io.kompose.service: fragment-1
 status:

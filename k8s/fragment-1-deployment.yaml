@@ -19,6 +19,7 @@ spec:
       annotations:
         kompose.cmd: kompose convert -f docker-compose.yaml
         kompose.version: 1.21.0 (992df58d8)
+        linkerd.io/inject: enabled
       creationTimestamp: null
       labels:
         io.kompose.service: fragment-1
@@ -26,7 +27,7 @@ spec:
       containers:
       - env:
         - name: PORT
-          value: "8090"
+          value: "8080"
         image: kyle83567/frontend-fragment-1
         imagePullPolicy: ""
         name: fragment-1
