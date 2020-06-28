@@ -3,16 +3,18 @@ const axios = require('axios');
 const app = express();
 const port = process.env.PORT || 8080;
 
+const services = process.env.FRONTEND_SERVICES.split(',');
+const service_endpoints = services.map(s => `http://${s}:8080/frontend-fragment`);
+
 app.get('/health', (req, res) => res.json({ health: 'OK' }));
 
 app.get('/', async (req, res) => {
   try {
-    const [component1, component2, component3] = await Promise.all([
-      axios.get('http://fragment-1:8080/frontend-fragment'),
-      axios.get('http://fragment-2:8080/frontend-fragment'),
-      axios.get('http://fragment-3:8080/frontend-fragment'),
-    ]);
-    res.send(`${component1.data.data.dom}${component2.data.data.dom}${component3.data.data.dom}`);
+    const components = await Promise.all(service_endpoints.map(e => axios.get(e)));
+    res.send(components.reduce((acc, resp, i) => {
+      const { dom } = resp.data.data;
+      return acc.replace(`{{${services[i]}}}`, dom);
+    }, process.env.FRONTEND_MARKUP));
   } catch (e) {
     console.log(e);
   }
