@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: fragment-2
+  name: fragment-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: fragment-2
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yaml
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: fragment-2
+    spec:
+      containers:
+      - env:
+        - name: PORT
+          value: "8060"
+        image: kyle83567/frontend-fragment-2
+        imagePullPolicy: ""
+        name: fragment-2
+        ports:
+        - containerPort: 8060
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
