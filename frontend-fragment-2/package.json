@@ -9,7 +9,9 @@
   "author": "millsky",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1",
+    "@grpc/proto-loader": "^0.5.4",
+    "grpc": "^1.24.3",
+    "mali": "^0.21.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }

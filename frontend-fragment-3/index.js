@@ -1,9 +1,13 @@
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
-const express = require('express');
+const path = require('path');
+const Mali = require('mali');
 
-const app = express();
 const port = process.env.PORT || 8080;
+
+const PROTO_PATH = path.resolve(__dirname, './frontend_service.proto');
+
+const app = new Mali(PROTO_PATH, 'FrontEnd');
 
 class Hello extends React.Component {
   render() {
@@ -11,15 +15,12 @@ class Hello extends React.Component {
   }
 }
 
-app.get('/health', (req, res) => res.json({ health: 'OK' }));
+function getFrontEnd (ctx) {
+  const DOM = ReactDOMServer.renderToString(
+    React.createElement(Hello, {toWhat: 'World-3'}, null)
+  );
+  ctx.res = { dom: DOM };
+}
 
-app.get('/frontend-fragment', (req, res) => {
-    const DOM = ReactDOMServer.renderToString(React.createElement(Hello, {toWhat: 'Fragment 3'}, null));
-    return res.json({
-      data: {
-        dom: DOM,
-      }
-    });
-});
-
-app.listen(port, () => console.log(`Application is up and running on ${port}`));
+app.use({ getFrontEnd });
+app.start(`127.0.0.1:${port}`);

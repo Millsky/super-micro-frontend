@@ -2,7 +2,7 @@ FROM node:10
 
 WORKDIR /app
 
-COPY package*.json /app/
+COPY frontend_service.proto package*.json /app/
 
 RUN npm install --production
 
