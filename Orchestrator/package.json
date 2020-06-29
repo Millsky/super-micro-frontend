@@ -9,7 +9,9 @@
   "author": "millsky",
   "license": "MIT",
   "dependencies": {
+    "@grpc/proto-loader": "^0.5.4",
     "axios": "^0.19.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "grpc": "^1.24.3"
   }
 }
