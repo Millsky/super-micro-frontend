@@ -1,0 +1,14 @@
+syntax = "proto3";
+package frontend_service;
+
+service FrontEnd {
+  rpc GetFrontEnd (FrontEndRequest) returns (FrontEndReply) {}
+}
+
+message FrontEndRequest {
+  string name = 1;
+}
+
+message FrontEndReply {
+  string dom = 1;
+}

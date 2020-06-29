@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: header
+  name: header
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: header
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yaml
+        kompose.version: 1.21.0 (992df58d8)
+        linkerd.io/inject: enabled
+      creationTimestamp: null
+      labels:
+        io.kompose.service: header
+    spec:
+      containers:
+      - env:
+        - name: PORT
+          value: "8080"
+        image: kyle83567/header:v1
+        imagePullPolicy: ""
+        name: header
+        ports:
+        - containerPort: 8090
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
