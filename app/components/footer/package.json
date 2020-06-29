@@ -1,5 +1,5 @@
 {
-  "name": "frontend-fragment-3",
+  "name": "footer",
   "version": "0.0.1",
   "description": "A piece of a frontend",
   "main": "index.js",
@@ -9,10 +9,6 @@
   "author": "millsky",
   "license": "MIT",
   "dependencies": {
-    "@grpc/proto-loader": "^0.5.4",
-    "grpc": "^1.24.3",
-    "mali": "^0.21.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^16.13.1"
   }
 }
