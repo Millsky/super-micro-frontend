@@ -39,7 +39,7 @@ spec:
               name: orchestrator-config
               key: markup
 
-        image: kyle83567/orchestrator:v8
+        image: kyle83567/orchestrator:v14
         imagePullPolicy: ""
         name: orchestrator
         ports:

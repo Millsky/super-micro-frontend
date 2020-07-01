@@ -1,15 +1,13 @@
-const express = require('express');
-const axios = require('axios');
 const path = require('path');
-const app = express();
 const grpc = require('grpc');
+const Mali = require('mali');
 const protoLoader = require('@grpc/proto-loader');
 const port = process.env.PORT || 8080;
 
-const PROTO_PATH = path.resolve(__dirname, './frontend_service.proto');
+const PROTO_PATH_FRONTEND_SERVICE = path.resolve(__dirname, './frontend_service.proto');
 
 const packageDefinition = protoLoader.loadSync(
-    PROTO_PATH,
+    PROTO_PATH_FRONTEND_SERVICE,
     {keepCase: true,
      longs: String,
      enums: String,
@@ -19,28 +17,35 @@ const packageDefinition = protoLoader.loadSync(
 
 const { frontend_service } = grpc.loadPackageDefinition(packageDefinition);
 
-const services = process.env.FRONTEND_SERVICES.split(',');
+const PROTO_PATH_ORCHESTRATOR_SERVICE = path.resolve(__dirname, './orchestrator_service.proto');
 
-const service_clients = services.map(
-  s => new frontend_service.FrontEnd(`${s}:8080`, grpc.credentials.createInsecure()),
-);
+const app = new Mali(PROTO_PATH_ORCHESTRATOR_SERVICE, 'Orchestrator');
 
-app.get('/health', (req, res) => res.json({ health: 'OK' }));
+async function getFrontEnds (ctx) {
+    const services = Object.keys(ctx.req.services);
+    const { markup } = ctx.req;
+    const service_clients = services.map(
+        s => new frontend_service.FrontEnd(`${s}:8080`, grpc.credentials.createInsecure()),
+    );
+    try {
+        const components = await Promise.all(service_clients.map(client => new Promise((resolve, reject) => {
+            client.GetFrontEnd({}, (err, response) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(response);
+            });
+        })));
+        const dom = components.reduce((acc, resp, i) => {
+            const { dom } = resp;
+            return acc.replace(new RegExp(`{{${services[i]}}}`, 'g'), dom);
+        }, markup);
+        ctx.res = { dom };
+    } catch (e) {
+        console.log(e);
+    }
+}
 
-app.get('/', async (req, res) => {
-  try {
-    const components = await Promise.all(service_clients.map(client => new Promise((resolve, reject) => {
-        client.GetFrontEnd({}, (err, response) => {
-            resolve(response);
-        });
-    })));
-    res.send(components.reduce((acc, resp, i) => {
-      const { dom } = resp;
-      return acc.replace(`{{${services[i]}}}`, dom);
-    }, process.env.FRONTEND_MARKUP));
-  } catch (e) {
-    console.log(e);
-  }
-});
+app.use({ getFrontEnds });
 
-app.listen(port, () => console.log(`Application is up and running on ${port}`));
+app.start(`127.0.0.1:${port}`);

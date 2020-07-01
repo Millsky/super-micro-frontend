@@ -22,3 +22,5 @@ orchestrator   NodePort   10.107.16.200   <none>        8080:30752/TCP   8m
 ```
 
 3. Access the pod(s) via `http://kubernetes.docker.internal:30752/`. Where `30752` is the port pulled from the step above.
+
+4. Testing gRPC [BloomRPC](https://github.com/uw-labs/bloomrpc) is a great tool that can be used to test the various gRPC APIs once exposed via `kubectl proxy`
