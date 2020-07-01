@@ -6,9 +6,6 @@ const grpc = require('grpc');
 const protoLoader = require('@grpc/proto-loader');
 const port = process.env.PORT || 8080;
 
-
-
-
 const PROTO_PATH = path.resolve(__dirname, './frontend_service.proto');
 
 const packageDefinition = protoLoader.loadSync(
@@ -25,7 +22,7 @@ const { frontend_service } = grpc.loadPackageDefinition(packageDefinition);
 const services = process.env.FRONTEND_SERVICES.split(',');
 
 const service_clients = services.map(
-  s => new frontend_service.FrontEnd(`${s}:8080`, grpc.credentials.createInsecure())
+  s => new frontend_service.FrontEnd(`${s}:8080`, grpc.credentials.createInsecure()),
 );
 
 app.get('/health', (req, res) => res.json({ health: 'OK' }));
