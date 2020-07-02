@@ -1,4 +1,4 @@
-FROM kyle83567/frontend-server:v1
+FROM kyle83567/frontend-server:v3
 
 COPY ./component.js /app/
 

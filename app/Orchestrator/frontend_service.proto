@@ -1,12 +1,13 @@
 syntax = "proto3";
 package frontend_service;
+import "google/protobuf/any.proto";
 
 service FrontEnd {
   rpc GetFrontEnd (FrontEndRequest) returns (FrontEndReply) {}
 }
 
 message FrontEndRequest {
-  string name = 1;
+   string props = 1;
 }
 
 message FrontEndReply {

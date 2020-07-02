@@ -11,8 +11,10 @@ const packageDefinition = protoLoader.loadSync(
     {keepCase: true,
      longs: String,
      enums: String,
-     defaults: true,
-     oneofs: true
+     defaults: false,
+     objects: true,
+     oneofs: true,
+     includeDirs: ["google/protobuf/any.proto", "google/protobuf/struct.proto"]
     });
 
 const { frontend_service } = grpc.loadPackageDefinition(packageDefinition);
@@ -28,8 +30,14 @@ async function getFrontEnds (ctx) {
         s => new frontend_service.FrontEnd(`${s}:8080`, grpc.credentials.createInsecure()),
     );
     try {
-        const components = await Promise.all(service_clients.map(client => new Promise((resolve, reject) => {
-            client.GetFrontEnd({}, (err, response) => {
+        const components = await Promise.all(service_clients.map((client, index) => new Promise((resolve, reject) => {
+            const serviceName = services[index];
+            console.log(serviceName);
+            const serviceArgs = ctx.req.services[serviceName];
+            console.log(serviceArgs);
+            client.GetFrontEnd({
+                props: serviceArgs,
+            }, (err, response) => {
                 if (err) {
                     reject(err);
                 }
