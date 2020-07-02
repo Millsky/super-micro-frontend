@@ -10,7 +10,7 @@ const PROTO_PATH = path.resolve(__dirname, './frontend_service.proto');
 const app = new Mali(PROTO_PATH, 'FrontEnd');
 
 function getFrontEnd (ctx) {
-  const DOM = ReactDOMServer.renderToString(reactApp);
+  const DOM = ReactDOMServer.renderToString(reactApp(JSON.parse(ctx.req.props)));
   ctx.res = { dom: DOM };
 }
 

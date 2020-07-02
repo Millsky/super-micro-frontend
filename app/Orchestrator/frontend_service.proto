@@ -6,7 +6,7 @@ service FrontEnd {
 }
 
 message FrontEndRequest {
-  string name = 1;
+   string props = 1;
 }
 
 message FrontEndReply {

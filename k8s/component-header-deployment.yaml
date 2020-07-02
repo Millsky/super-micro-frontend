@@ -28,7 +28,7 @@ spec:
       - env:
         - name: PORT
           value: "8080"
-        image: kyle83567/header:v1
+        image: kyle83567/header:v2
         imagePullPolicy: ""
         name: header
         ports:

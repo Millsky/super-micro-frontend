@@ -7,4 +7,4 @@ class Body extends React.Component {
   }
 }
 
-module.exports = React.createElement(Body, {}, null);
+module.exports = (props) => React.createElement(Body, props, null);

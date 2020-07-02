@@ -7,7 +7,7 @@ service Orchestrator {
 
 message OrchestratorRequest {
   map<string, string> services = 1;
-  string markup = 2;
+  string markup = 3;
 }
 
 message OrchestratorReply {
