@@ -1,7 +1,5 @@
 syntax = "proto3";
 package orchestrator_service;
-import "google/protobuf/any.proto";
-import "google/protobuf/struct.proto";
 
 service Orchestrator {
   rpc GetFrontEnds (OrchestratorRequest) returns (OrchestratorReply) {}

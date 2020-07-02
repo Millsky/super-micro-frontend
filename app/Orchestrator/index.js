@@ -14,7 +14,6 @@ const packageDefinition = protoLoader.loadSync(
      defaults: false,
      objects: true,
      oneofs: true,
-     includeDirs: ["google/protobuf/any.proto", "google/protobuf/struct.proto"]
     });
 
 const { frontend_service } = grpc.loadPackageDefinition(packageDefinition);
