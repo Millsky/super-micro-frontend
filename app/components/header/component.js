@@ -6,4 +6,4 @@ class Header extends React.Component {
   }
 }
 
-module.exports = React.createElement(Header, {}, null);
+module.exports = (props) => React.createElement(Header, props, null);
