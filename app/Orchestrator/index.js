@@ -32,9 +32,7 @@ async function getFrontEnds (ctx) {
     try {
         const components = await Promise.all(service_clients.map((client, index) => new Promise((resolve, reject) => {
             const serviceName = services[index];
-            console.log(serviceName);
             const serviceArgs = ctx.req.services[serviceName];
-            console.log(serviceArgs);
             client.GetFrontEnd({
                 props: serviceArgs,
             }, (err, response) => {
