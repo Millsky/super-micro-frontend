@@ -6,6 +6,24 @@ const LoadablePlugin = require("@loadable/webpack-plugin");
 module.exports = {
     mode: 'production',
     entry: './component.js',
+    optimization: {
+        minimize: true,
+        moduleIds: 'deterministic',
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /node_modules/,
+                    name(module, chunks, cacheGroupKey) {
+                        const moduleFileName = module.identifier().split('/').reduceRight(item => item);
+                        console.log(moduleFileName);
+                        return `${cacheGroupKey}-${moduleFileName}`;
+                    },
+                    chunks: 'all',
+                    enforce: true
+                },
+            }
+        }
+    },
     module: {
         rules: [
             {
@@ -24,31 +42,14 @@ module.exports = {
             },
         ],
     },
-   optimization: {
-       moduleIds: 'deterministic',
-       splitChunks: {
-           cacheGroups: {
-               vendor: {
-                   test: /node_modules/,
-                   name(module, chunks, cacheGroupKey) {
-                       const moduleFileName = module.identifier().split('/').reduceRight(item => item);
-                       const allChunksNames = chunks.map((item) => item.name).join('~');
-                       return `${cacheGroupKey}-${moduleFileName}`;
-                   },
-                   chunks: 'all',
-                   enforce: true
-               },
-           }
-       }
-    },
     plugins: [
         new LoadablePlugin({ filename: "stats.json", writeToDisk: true }),
         new ModuleFederationPlugin({
-            name: "header",
-            library: { type: "var", name: "header" },
+            name: "footer",
+            library: { type: "var", name: "footer" },
             filename: "component.js",
             exposes: {
-                "./header": "./component",
+                "./footer": "./component",
             },
             shared: ["react", "react-dom"],
         }),
@@ -59,4 +60,3 @@ module.exports = {
         chunkFilename: "[name].js",
     },
 };
-

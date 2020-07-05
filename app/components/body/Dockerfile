@@ -1,5 +1,5 @@
-FROM kyle83567/frontend-server:v3
+FROM kyle83567/frontend-server:v6
 
-COPY ./component.js /app/
+COPY dist /app/dist/
 
 CMD ["node", "/app/index.js"]
