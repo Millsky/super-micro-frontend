@@ -1,0 +1,165 @@
+{
+  "hash": "b5801697e92a5de00855",
+  "version": "5.0.0-beta.20",
+  "publicPath": "",
+  "outputPath": "/Users/millsky/Dev/super-fe/app/components/header/dist/client",
+  "assets": [
+    {
+      "name": "294.3b5f944adb5dae11afc7.js",
+      "size": 7340,
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "emitted": false,
+      "comparedForEmit": false,
+      "info": {
+        "immutable": true
+      },
+      "chunks": [
+        294
+      ],
+      "auxiliaryChunks": [],
+      "isOverSizeLimit": false
+    },
+    {
+      "name": "294.3b5f944adb5dae11afc7.js.LICENSE.txt",
+      "size": 295,
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "emitted": false,
+      "comparedForEmit": false,
+      "info": {},
+      "chunks": [],
+      "auxiliaryChunks": [],
+      "isOverSizeLimit": false
+    },
+    {
+      "name": "735.026e02fbf5dc0baef880.js",
+      "size": 3957,
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "emitted": false,
+      "comparedForEmit": false,
+      "info": {
+        "immutable": true
+      },
+      "chunks": [
+        735
+      ],
+      "auxiliaryChunks": [],
+      "isOverSizeLimit": false
+    },
+    {
+      "name": "component.js",
+      "size": 4201,
+      "chunkNames": [
+        "header"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "emitted": false,
+      "comparedForEmit": false,
+      "info": {},
+      "chunks": [
+        19
+      ],
+      "auxiliaryChunks": [],
+      "isOverSizeLimit": false
+    },
+    {
+      "name": "main.0c31cb2a6e0fd4544676.js",
+      "size": 7768,
+      "chunkNames": [
+        "main"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "emitted": false,
+      "comparedForEmit": false,
+      "info": {
+        "immutable": true
+      },
+      "chunks": [
+        179,
+        735
+      ],
+      "auxiliaryChunks": [],
+      "isOverSizeLimit": false
+    }
+  ],
+  "filteredAssets": 0,
+  "assetsByChunkName": {
+    "header": [
+      "component.js"
+    ],
+    "main": [
+      "main.0c31cb2a6e0fd4544676.js"
+    ]
+  },
+  "entrypoints": {
+    "main": {
+      "name": "main",
+      "chunks": [
+        179
+      ],
+      "assets": [
+        "main.0c31cb2a6e0fd4544676.js"
+      ],
+      "auxiliaryAssets": [],
+      "children": {},
+      "childAssets": {},
+      "isOverSizeLimit": false
+    },
+    "header": {
+      "name": "header",
+      "chunks": [
+        19
+      ],
+      "assets": [
+        "component.js"
+      ],
+      "auxiliaryAssets": [],
+      "children": {},
+      "childAssets": {},
+      "isOverSizeLimit": false
+    }
+  },
+  "namedChunkGroups": {
+    "main": {
+      "name": "main",
+      "chunks": [
+        179
+      ],
+      "assets": [
+        "main.0c31cb2a6e0fd4544676.js"
+      ],
+      "auxiliaryAssets": [],
+      "children": {},
+      "childAssets": {},
+      "isOverSizeLimit": false
+    },
+    "header": {
+      "name": "header",
+      "chunks": [
+        19
+      ],
+      "assets": [
+        "component.js"
+      ],
+      "auxiliaryAssets": [],
+      "children": {},
+      "childAssets": {},
+      "isOverSizeLimit": false
+    }
+  },
+  "errors": [],
+  "warnings": [],
+  "children": []
+}

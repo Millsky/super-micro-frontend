@@ -45,7 +45,23 @@ async function getFrontEnds (ctx) {
             const { dom } = resp;
             return acc.replace(new RegExp(`{{${services[i]}}}`, 'g'), dom);
         }, markup);
-        ctx.res = { dom };
+
+        const scripts = components.reduce((acc, resp, i) => {
+            const { scriptTags, linkTags, styleTags } = resp;
+            return {
+                scriptTags: `${acc.scriptTags}${scriptTags}`,
+                linkTags: `${acc.linkTags}${linkTags}`,
+                styleTags: `${acc.styleTags}${styleTags}`,
+            }
+        }, {
+            scriptTags: '',
+            linkTags: '',
+            styleTags: '',
+        });
+
+        const { scriptTags, linkTags, styleTags } = scripts;
+
+        ctx.res = { dom, scriptTags, linkTags, styleTags };
     } catch (e) {
         console.log(e);
     }

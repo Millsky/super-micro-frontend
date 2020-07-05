@@ -11,4 +11,7 @@ message FrontEndRequest {
 
 message FrontEndReply {
   string dom = 1;
+  string scriptTags = 2;
+  string linkTags = 3;
+  string styleTags = 4;
 }
