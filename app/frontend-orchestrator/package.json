@@ -1,0 +1,17 @@
+{
+  "name": "frontend-orchestrator",
+  "version": "0.0.1",
+  "description": "Orchestration for the entire frontend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "millsky",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.5.4",
+    "express": "^4.17.1",
+    "grpc": "^1.24.3",
+    "helmet": "^3.23.3"
+  }
+}

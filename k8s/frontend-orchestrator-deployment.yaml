@@ -6,13 +6,13 @@ metadata:
     kompose.version: 1.21.0 (992df58d8)
   creationTimestamp: null
   labels:
-    io.kompose.service: orchestrator
-  name: orchestrator
+    io.kompose.service: frontend-orchestrator
+  name: frontend-orchestrator
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: orchestrator
+      io.kompose.service: frontend-orchestrator
   strategy: {}
   template:
     metadata:
@@ -22,26 +22,15 @@ spec:
         linkerd.io/inject: enabled
       creationTimestamp: null
       labels:
-        io.kompose.service: orchestrator
+        io.kompose.service: frontend-orchestrator
     spec:
       containers:
       - env:
         - name: PORT
           value: "8080"
-        - name: FRONTEND_SERVICES
-          valueFrom:
-            configMapKeyRef:
-              name: orchestrator-config
-              key: services
-        - name: FRONTEND_MARKUP
-          valueFrom:
-            configMapKeyRef:
-              name: orchestrator-config
-              key: markup
-
-        image: kyle83567/orchestrator:v31
+        image: kyle83567/frontend-orchestrator:v4
         imagePullPolicy: ""
-        name: orchestrator
+        name: frontend-orchestrator
         ports:
         - containerPort: 8080
         resources: {}
