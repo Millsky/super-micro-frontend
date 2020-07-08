@@ -1,9 +1,8 @@
 const React = require('react');
+require('./styles.css');
 
-class Header extends React.Component {
-  render() {
-    return React.createElement('header', null, `this is a header`);
-  }
-}
+const Header = (props) => {
+    return (<div></div>);
+};
 
-module.exports = (props) => React.createElement(Header, props, null);
+export default Header;

@@ -1,0 +1,18 @@
+syntax = "proto3";
+package orchestrator_service;
+
+service Orchestrator {
+  rpc GetFrontEnds (OrchestratorRequest) returns (OrchestratorReply) {}
+}
+
+message OrchestratorRequest {
+  map<string, string> services = 1;
+  string markup = 3;
+}
+
+message OrchestratorReply {
+  string dom = 1;
+  string scriptTags = 2;
+  string linkTags = 3;
+  string styleTags = 4;
+}

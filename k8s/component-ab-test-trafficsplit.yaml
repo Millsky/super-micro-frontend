@@ -8,8 +8,6 @@ spec:
   # Services inside the namespace with their own selectors, endpoints and configuration.
   backends:
   - service: footer
-    weight: 33
-  - service: body
-    weight: 33
+    weight: 10
   - service: header
-    weight: 34
+    weight: 90
