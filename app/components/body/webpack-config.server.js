@@ -1,6 +1,4 @@
 const path = require('path');
-const ModuleFederationPlugin = require("webpack").container
-    .ModuleFederationPlugin;
 const ExtractCSSChunks = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -43,4 +41,4 @@ module.exports = {
         filename: "[name].js",
         libraryTarget: "commonjs2",
     },
-}
+};

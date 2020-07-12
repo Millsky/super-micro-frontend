@@ -3,50 +3,524 @@ const path = require('path');
 const app = express();
 const grpc = require('grpc');
 const protoLoader = require('@grpc/proto-loader');
+const React = require('react');
+const { renderToString } = require('react-dom/server');
+const rfu = require('require-from-url/sync');
 const port = process.env.PORT || 8080;
-
-const PROTO_PATH = path.resolve(__dirname, './orchestrator_service.proto');
-
-const packageDefinition = protoLoader.loadSync(
-    PROTO_PATH,
-    {keepCase: true,
-        longs: String,
-        enums: String,
-        defaults: true,
-        oneofs: true
-    });
-
-const { orchestrator_service } = grpc.loadPackageDefinition(packageDefinition);
-
-const orchestratorService = new orchestrator_service.Orchestrator(`kubernetes.docker.internal:31054`, grpc.credentials.createInsecure());
 
 app.get('/health', (req, res) => res.send('OK'));
 
+const OtherComponent = loadable(() => rfu(''))
+
+const ElCache = {};
+
+class ReactRemoteElement extends React.Component {
+    render() {
+        const { baseURL, ...restProps } = this.props;
+        // Call the remote server to render the component
+        let url = `${baseURL}/edge-handler.js?props=${encodeURIComponent(JSON.stringify(restProps))}`;
+        if (ElCache[url]) {
+            return React.createElement(ElCache[url], null);
+        } else {
+            const ELL = rfu(url);
+            ElCache[url] = ELL;
+            return React.createElement(ELL, null);
+        }
+    }
+}
+
+// Remote react component
 app.get('/', async (req, res) => {
     try {
-        const services = {
-            "footer": "",
-            "header": "",
-        };
-        const markup = '{{header}}{{footer}}';
-        const { linkTags, styleTags, dom, scriptTags } = await new Promise((resolve, reject) => {
-            orchestratorService.GetFrontEnds({ "services": services, "markup": markup }, (err, response) => {
-                if (err) {
-                    reject(err);
-                }
-                resolve(response);
-            });
-        });
+        const dom = renderToString(React.createElement('div', null,
+            [
+            React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: 'cool cool cool',
+                key: 1,
+                }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 2,
+                }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 2,
+                }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 2,
+                }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),                React.createElement(ReactRemoteElement, {
+                baseURL: 'http://localhost:8080',
+                cool: '123',
+                key: 2,
+            }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 3,
+                }, null),
+
+            ]));
         return res.send(`<!doctype html>
              <html>
                 <head>
-                    ${linkTags}
-                    ${styleTags}
                 </head>
-               
+                
                 <body>
-                  <div id="root">${dom}</div>
-                  ${scriptTags}
+                  <div id="root">
+                    ${dom}
+                  </div>
                 </body>
               </html>`);
     } catch (e) {
