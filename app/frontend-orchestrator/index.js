@@ -10,8 +10,6 @@ const port = process.env.PORT || 8080;
 
 app.get('/health', (req, res) => res.send('OK'));
 
-const OtherComponent = loadable(() => rfu(''))
-
 const ElCache = {};
 
 class ReactRemoteElement extends React.Component {
@@ -68,11 +66,12 @@ app.get('/', async (req, res) => {
                     baseURL: 'http://localhost:8080',
                     cool: '123',
                     key: 3,
-                }, null),                React.createElement(ReactRemoteElement, {
-                baseURL: 'http://localhost:8080',
-                cool: '123',
-                key: 2,
-            }, null),
+                }, null),
+                React.createElement(ReactRemoteElement, {
+                    baseURL: 'http://localhost:8080',
+                    cool: '123',
+                    key: 2,
+                }, null),
                 React.createElement(ReactRemoteElement, {
                     baseURL: 'http://localhost:8080',
                     cool: '123',

@@ -27,6 +27,13 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.m?remote.js$/,
+                exclude: /(node_modules)/,
+                use: {
+                    loader: ''
+                }
+            }
+            {
                 test: /\.m?js$/,
                 exclude: /(node_modules)/,
                 use: {
