@@ -1,5 +1,6 @@
-FROM kyle83567/frontend-server:v6
+FROM kyle83567/frontend-server:v14
 
-COPY dist /app/dist/
+COPY build /app/dist/
+COPY deps.js /app/
 
-CMD ["node", "/app/index.js"]
+CMD ["node", "--experimental-modules", "/app/index.js"]

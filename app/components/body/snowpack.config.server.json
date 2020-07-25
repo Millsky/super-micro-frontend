@@ -1,0 +1,11 @@
+{
+  "extends": "@snowpack/app-scripts-react",
+  "scripts": {
+    "build:js,jsx,ts,tsx": "snowpack-plugin-import-map"
+  },
+  "plugins": [
+    ["snowpack-plugin-import-map", {
+      "react": "react"
+    }]
+  ]
+}
