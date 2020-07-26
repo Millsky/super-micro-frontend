@@ -14,9 +14,7 @@ const PROTO_PATH = path.resolve(__dirname, './frontend_service.proto');
 const app = new Mali(PROTO_PATH, 'FrontEnd');
 
 // Get the compiled stats file from the downstream client
-const scriptTags = deps.scripts.reduce((acc, s) => `${acc}<script src="${s}" />`);
-
-console.log(scriptTags);
+const scriptTags = deps.scripts.reduce((acc, s) => `${acc}<script type="module" src="${s}" />`, "");
 
 async function getFrontEnd (ctx) {
   const DOM = ReactDOMServer.renderToString(React.createElement(ReactApp, null, "This is some Body"));

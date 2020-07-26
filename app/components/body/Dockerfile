@@ -1,4 +1,4 @@
-FROM kyle83567/frontend-server:v14
+FROM kyle83567/frontend-server:v16
 
 COPY build /app/dist/
 COPY deps.js /app/

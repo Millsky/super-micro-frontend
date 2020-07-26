@@ -1,9 +1,8 @@
 import React from 'react';
 
-class Body extends React.Component {
-  render() {
-    return <div>This is some Body</div>
-  }
-}
+const Body = () => {
+  const [count, setCount] = React.useState(0);
+  return <div>This is some body <button onClick={() => setCount(count + 1)}>CLick</button>{count}</div>
+};
 
 export default Body;

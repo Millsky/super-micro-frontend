@@ -6,6 +6,6 @@ COPY *.proto package*.json /app/
 
 RUN npm install --production
 
-COPY index.mjs /app
+COPY index.js /app
 
-CMD ["node", "/app/index.mjs"]
+CMD ["node", "/app/index.js"]

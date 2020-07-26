@@ -25,10 +25,9 @@ app.get('/health', (req, res) => res.send('OK'));
 app.get('/', async (req, res) => {
     try {
         const services = {
-            "footer": "",
-            "header": "",
+            "body": "",
         };
-        const markup = '{{header}}{{footer}}';
+        const markup = '{{body}}';
         const { linkTags, styleTags, dom, scriptTags } = await new Promise((resolve, reject) => {
             orchestratorService.GetFrontEnds({ "services": services, "markup": markup }, (err, response) => {
                 if (err) {
@@ -38,17 +37,11 @@ app.get('/', async (req, res) => {
             });
         });
         return res.send(`<!doctype html>
-             <html>
-                <head>
-                    ${linkTags}
-                    ${styleTags}
-                </head>
-               
                 <body>
                   <div id="root">${dom}</div>
-                  ${scriptTags}
+                   <script type="module" src="https://wanderscout.app/component-body/index.js"></script>
                 </body>
-              </html>`);
+                `);
     } catch (e) {
         console.log(e);
         res.send('BAD REQUEST');

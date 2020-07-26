@@ -5,7 +5,8 @@
     },
     "plugins": [
         ["snowpack-plugin-import-map", {
-            "react": "https://cdn.pika.dev/react@^16.13.1"
+            "react": "https://cdn.pika.dev/react@^16.13.1",
+            "react-dom": "https://cdn.pika.dev/react-dom@^16.13.1"
         }]
     ]
 }
