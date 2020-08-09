@@ -39,7 +39,7 @@ app.get('/', async (req, res) => {
         return res.send(`<!doctype html>
                 <body>
                   <div id="root">${dom}</div>
-                   <script type="module" src="https://wanderscout.app/component-body/index.js"></script>
+                  <script type="module" src="https://wanderscout.app/component-body/index.js"></script>
                 </body>
                 `);
     } catch (e) {
