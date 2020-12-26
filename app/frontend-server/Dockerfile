@@ -2,10 +2,10 @@ FROM node:14
 
 WORKDIR /app
 
-COPY frontend_service.proto package*.json /app/
+COPY ./src/frontend_service.proto package*.json /app/
 
 RUN npm install --production
 
-COPY index.js /app/
+COPY ./src/index.js /app/
 
-CMD ["node", "/app/index.js"]
+CMD ["node", "/app/index.mjs"]

@@ -41,6 +41,7 @@ async function getFrontEnds (ctx) {
                 resolve(response);
             });
         })));
+
         const dom = components.reduce((acc, resp, i) => {
             const { dom } = resp;
             return acc.replace(new RegExp(`{{${services[i]}}}`, 'g'), dom);

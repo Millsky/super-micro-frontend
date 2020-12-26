@@ -2,32 +2,34 @@
   "name": "body",
   "version": "0.0.1",
   "description": "A piece of a frontend",
-  "main": "index.js",
+  "main": "./src/component.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:client": "webpack --config webpack-config.client.js",
-    "build:server": "webpack --config webpack-config.server.js",
-    "build": "rm -rf dist && npm run build:client && npm run build:server"
+    "build:client": "snowpack --config snowpack.config.client.json build --out build/client",
+    "build:server": "babel ./src/component.js --out-file ./build/server.js",
+    "start": "snowpack dev",
+    "start-server": "node --experimental-modules ./build/server/_dist_/component.js",
+    "build": "npm run build:client && npm run build:server"
   },
   "author": "millsky",
   "license": "MIT",
   "dependencies": {
-    "react": "^16.13.1"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "snowpack-plugin-import-map": "^1.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.4",
     "@babel/core": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "@loadable/webpack-plugin": "^5.13.0",
+    "@snowpack/app-scripts-react": "^1.6.0-alpha.0",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addons": "^5.3.19",
     "@storybook/react": "^5.3.19",
-    "babel-loader": "^8.1.0",
-    "css-loader": "^3.6.0",
     "mini-css-extract-plugin": "^0.9.0",
-    "style-loader": "^1.2.1",
-    "webpack": "^5.0.0-beta.20",
-    "webpack-cli": "^3.3.12"
+    "snowpack": "^2.6.4"
   }
 }

@@ -9,6 +9,7 @@ metadata:
     io.kompose.service: body
   name: body
 spec:
+  type: "NodePort"
   ports:
   - name: "8080"
     port: 8080
