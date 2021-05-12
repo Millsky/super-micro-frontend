@@ -15,7 +15,7 @@
     "@grpc/proto-loader": "^0.5.4",
     "@loadable/component": "^5.13.1",
     "@loadable/server": "^5.13.1",
-    "grpc": "^1.24.3",
+    "grpc": "^1.24.9",
     "mali": "^0.21.0",
     "mali-tojson": "^0.2.0",
     "react": "^16.13.1",
